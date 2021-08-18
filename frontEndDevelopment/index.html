@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
+    <title>ArtConnect</title>
+</head>
+<header>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="nav navbar-nav">
+            <a class="nav-item nav-link active" href="#">ArtConnect <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Login</a>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div id="login">
+        <h2>Welcome to ArtConnect</h2>
+        <hr>
+        <h4>Please login below</h4>
+        <button type="button" class="btn btn-primary"><i class="bi bi-google"></i> Login with Google </button>
+    </div>
+    <div id="welcomePage">
+        <h2>Welcome, <span id="clientUserName">Max</span></h2>
+        <hr>
+        <h4>Your shared artwork</h4>
+        <div class="usersSharedArtWork">
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Maxwell James Webb is a beuaty</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+<style>
+    html,
+    body {
+        min-height: 100%;
+    }
+    
+    body {
+        font-family: 'Atkinson Hyperlegible', sans-serif;
+        background-image: url(https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: cover;
+    }
+    
+    #login {
+        display: none;
+        text-align: center;
+        margin-top: 70%;
+        color: white;
+    }
+    
+    #welcomePage {
+        margin-top: 20%;
+    }
+</style>
+
+<!-- Animations only -->
+
+<script>
+    let ui = {
+        show: function(_page) {
+            document.getElementById(_page).style.display = 'block';
+        },
+        hide: function(_page) {
+            document.getElementById(_page).style.display = 'none';
+        }
+    }
+</script>
