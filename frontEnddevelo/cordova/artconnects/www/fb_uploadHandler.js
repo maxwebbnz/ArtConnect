@@ -19,6 +19,7 @@ let fb_uploadHandler = {
         uploadImage(artFile)
 
         async function uploadImage(_artFile) {
+            console.log('performing image upload')
             const ref = firebase.storage().ref();
             const file = _artFile
             const name = +new Date() + "-" + file.name;
@@ -33,8 +34,11 @@ let fb_uploadHandler = {
                     artFileURL = url;
                 })
                 .catch(console.error);
+            // FETCH amount of work
 
-            firebase.database().ref('users/' + client.uid + '/artwork/' + artWorkAmount + 1).update({
+            let id = amountOfArt;
+
+            firebase.database().ref('users/' + client.uid + '/artwork/' + id).update({
                 title: artName,
                 name: artAuthor,
                 url: artFileURL,
@@ -42,7 +46,7 @@ let fb_uploadHandler = {
             console.log('uploaded image')
             ui.hide('uploadArtWork')
             ui.show('welcomePage')
-            html.update()
+            html.update(client)
         }
 
     }

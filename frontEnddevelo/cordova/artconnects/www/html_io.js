@@ -3,23 +3,21 @@
  * All rights reserved.
  */
 
-let artWorkAmount = 0;
+let amountOfArt = 0;
 
 let html = {
     update: function(_info1, _info2) {
         const USERHTML = document.getElementById('clientNAME')
         const USEREMAIL = document.getElementById('clientEMAIL')
         const USERPRORFILEPIC = document.getElementById('clientPROFILEPIC')
-        USERHTML.innerHTML = client.name
+        USERHTML.innerHTML = _info1.name
             // USEREMAIL.innerHTML = _info1.email
             // USERPRORFILEPIC.src = _info1.profileURL
             // generate posts automatically
         this.createCards()
-        console.log('completed html update')
 
     },
     createCards: function() {
-
         var posts = [];
 
         fetchArtWork()
@@ -30,11 +28,14 @@ let html = {
             if (snapshot.exists()) {
                 db.get().then(function(childSnapshot) {
                     let artWorkArray = childSnapshot.val()
-                    for (var i = 0; i < artWorkArray.length; i++) {
+                    console.log(artWorkArray)
+                    console.log(childSnapshot.numChildren())
+                    for (var i = 0; i < childSnapshot.numChildren(); i++) {
+                        console.log('created card')
                         createPostCard(artWorkArray[i]);
-
+                        console.log(artWorkArray[i])
+                        amountOfArt = amountOfArt + 1;
                     }
-                    artWorkAmount = artWorkArray.length
                 });
 
                 console.log(posts)
@@ -84,7 +85,6 @@ let html = {
                 };
                 initListOfTasks();
 
-
             }
 
         }
@@ -92,7 +92,6 @@ let html = {
 
     }
 }
-
 let ui = {
     show: function(_page) {
         if (_page == 'form') {
