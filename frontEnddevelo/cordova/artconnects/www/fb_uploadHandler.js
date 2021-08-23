@@ -19,6 +19,7 @@ let fb_uploadHandler = {
         uploadImage(artFile)
 
         async function uploadImage(_artFile) {
+            alert.artwork()
             console.log('performing image upload')
             const ref = firebase.storage().ref();
             const file = _artFile
@@ -33,8 +34,7 @@ let fb_uploadHandler = {
                     console.log(url);
                     artFileURL = url;
                 })
-                .catch(console.error);
-            // FETCH amount of work
+                // FETCH amount of work
 
             let id = amountOfArt;
 
@@ -44,6 +44,8 @@ let fb_uploadHandler = {
                 url: artFileURL,
             });
             console.log('uploaded image')
+            swal.close();
+            alert.success("Successfully uploaded your art work!")
             ui.hide('uploadArtWork')
             ui.show('welcomePage')
             html.update(client)

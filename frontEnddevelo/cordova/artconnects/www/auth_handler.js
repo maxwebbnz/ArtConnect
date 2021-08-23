@@ -34,8 +34,7 @@ let auth = {
                             // Handle Errors here.
                             var errorCode = error.code;
                             var errorMessage = error.message;
-                            console.log(errorCode)
-                            console.log(errorMessage)
+                            alert.warn(error, errorMessage)
                         });
                     })
             }
@@ -61,6 +60,7 @@ let auth = {
                 html.update(client);
                 ui.hide('login')
                 ui.show('welcomePage')
+                alert.authSuccess()
             } else {
                 const userData = snapshot.val();
                 console.log("fb_initUserData | User has logged in before, no need to write more data", 'info')
@@ -69,6 +69,7 @@ let auth = {
                 html.update(client);
                 ui.hide('login')
                 ui.show('welcomePage')
+                alert.authSuccess()
             }
         });
     },
@@ -77,6 +78,7 @@ let auth = {
             console.log("You signed out!")
             location.reload();
         }).catch((error) => {
+            alert.warn(error, error.message)
             console.log("We couldn't log you out, please try again'")
         });
     },
@@ -96,6 +98,8 @@ let auth = {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                alert.warn(error, error.message)
+
             });
 
     },
@@ -114,7 +118,7 @@ let auth = {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-
+                alert.warn(error, error.message)
                 console.log(error)
             });
 
@@ -139,6 +143,8 @@ function cordovaSignInRedirect(provider) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        alert.warn(error, error.message)
+
     });
     // [END auth_cordova_sign_in_redirect]
 }
