@@ -2,19 +2,24 @@
  * Copyright (c) 2021 Max Webb
  * All rights reserved.
  */
+
+let artWorkAmount = 0;
+
 let html = {
     update: function(_info1, _info2) {
         const USERHTML = document.getElementById('clientNAME')
         const USEREMAIL = document.getElementById('clientEMAIL')
         const USERPRORFILEPIC = document.getElementById('clientPROFILEPIC')
-        USERHTML.innerHTML = _info1.name
+        USERHTML.innerHTML = client.name
             // USEREMAIL.innerHTML = _info1.email
             // USERPRORFILEPIC.src = _info1.profileURL
             // generate posts automatically
         this.createCards()
+        console.log('completed html update')
 
     },
     createCards: function() {
+
         var posts = [];
 
         fetchArtWork()
@@ -29,6 +34,7 @@ let html = {
                         createPostCard(artWorkArray[i]);
 
                     }
+                    artWorkAmount = artWorkArray.length
                 });
 
                 console.log(posts)
@@ -84,5 +90,23 @@ let html = {
         }
 
 
+    }
+}
+
+let ui = {
+    show: function(_page) {
+        if (_page == 'form') {
+            document.getElementById('welcomePage').style = 'display: none';
+            document.getElementById('uploadArtWork').style = 'display: block';
+            document.getElementById('artworkauthor').value = client.name
+        } else if (_page == 'register') {
+            document.getElementById('login').style = 'display: none';
+            document.getElementById('register').style = 'display: block';
+        } else {
+            document.getElementById(_page).style = 'display: block;'
+        }
+    },
+    hide: function(_page) {
+        document.getElementById(_page).style = 'display: none;'
     }
 }
