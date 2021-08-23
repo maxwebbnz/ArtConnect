@@ -14,7 +14,10 @@ let html = {
             // USEREMAIL.innerHTML = _info1.email
             // USERPRORFILEPIC.src = _info1.profileURL
             // generate posts automatically
+        const POSTDOMELEMENT = document.getElementById("card-container");
+        POSTDOMELEMENT.innerHTML = '';
         this.createCards()
+
 
     },
     createCards: function() {
