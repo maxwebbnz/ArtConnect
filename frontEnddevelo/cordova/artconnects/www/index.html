@@ -6,12 +6,16 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: ms-appdata: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
     <!-- Firebase CDNs -->
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
+    <script src="cordova.js"></script>
+
     <script src="index.js"></script>
     <!--   Ui -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
@@ -22,6 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 
     <title>ArtConnect</title>
@@ -31,6 +36,8 @@
     <script src="fb_uploadHandler.js"></script>
     <!-- HTML IO -->
     <script src="html_io.js"></script>
+    <!-- Camera Handling -->
+    <script src="camera.js"></script>
 </head>
 <header>
     <nav class="navbar navbar-expand navbar-light bg-light">
@@ -53,7 +60,11 @@
         <hr>
         <h4>Your shared artwork</h4>
         <div id="card-container"></div>
-
+        <div id="bumper">
+            <div class="h2">You have no posts, go create one!</div>
+            <hr>
+            <button type="button" class="btn btn-primary" onclick="ui.show('form')">Create a post</button>
+        </div>
     </div>
     <div id="uploadArtWork">
         <h3>Upload Artwork</h3>
@@ -71,8 +82,9 @@
                 <input class="form-control" id="artworktags">
             </div>
             <input class="form-control" type="file" id="photo">
-
-            <!-- <button style="margin-top: 20px" class="btn btn-primary">Upload Image</button> -->
+            <!-- redacted -- doesn't need to be here :D -->
+            <!-- <button style="margin-top: 20px" type='button' id="btn" class="btn btn-primary">Take Photo</button>
+            <button id="captureImage">SHOT</button> -->
 
             <div style="margin-top: 20px" class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="permisson">
@@ -143,32 +155,24 @@
         padding-left: 3%;
         width: 90%;
     }
-    
-    .card-body img {
+    /* .card-body img {
         width: 20%;
         height: 20%;
         padding-bottom: 3%;
-    }
+    } */
     
     .card {
         width: 90%;
+        margin-top: 3%;
+    }
+    
+    #bumper {
+        display: none;
+        text-align: center;
+        margin-top: 30%;
+        color: white;
     }
 </style>
 
 <script>
-    var firebaseConfig = {
-        apiKey: "AIzaSyBDX8i-zyw4lRzXwTchnzIBNMyd8vJfwxM",
-        authDomain: "dtec-artconnect.firebaseapp.com",
-        projectId: "dtec-artconnect",
-        storageBucket: "dtec-artconnect.appspot.com",
-        messagingSenderId: "316146994859",
-        appId: "1:316146994859:web:dda34713c7ce03124d31ee"
-    };
-
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady() {
-        firebase.initializeApp(firebaseConfig);
-
-    }
 </script>

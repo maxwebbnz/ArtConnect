@@ -23,9 +23,6 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener('deviceready', onDeviceReady, false);
-//
-// Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyBDX8i-zyw4lRzXwTchnzIBNMyd8vJfwxM",
     authDomain: "dtec-artconnect.firebaseapp.com",
@@ -34,14 +31,16 @@ var firebaseConfig = {
     messagingSenderId: "316146994859",
     appId: "1:316146994859:web:dda34713c7ce03124d31ee"
 };
-// Initialize Firebase
 
-// Initialize Firebase
+document.addEventListener("deviceready", onDeviceReady, false);
+
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
-
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
-    firebase.initializeApp(firebaseConfig);
-
+    console.log(navigator.camera);
+    console.log(cordova.file);
+    document.getElementById("captureImage").addEventListener("click", captureImage);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    } else {
+        firebase.app(); // if already initialized, use that one
+    }
 }

@@ -11,9 +11,16 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
+<preference name="OverrideUserAgent" value="Mozilla/5.0 Google" />
+<!-- <plugin name="cordova-plugin-ios-permissions" spec="https://github.com/MBuchalik/cordova-plugin-ios-permissions.git#v1.1.1" source="git" /> -->
+
+    <allow-navigation href="http://*" />
+<allow-navigation href="https://*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
+        <preference name="android-minSdkVersion" value="21" />
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -28,4 +35,5 @@
         <path url="/__/auth/callback"/>
     </host>
 </universal-links>
+
 </widget>

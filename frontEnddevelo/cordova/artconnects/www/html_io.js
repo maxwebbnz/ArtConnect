@@ -17,9 +17,8 @@ let html = {
         const POSTDOMELEMENT = document.getElementById("card-container");
         POSTDOMELEMENT.innerHTML = '';
         this.createCards()
-
-
     },
+
     createCards: function() {
         var posts = [];
 
@@ -30,44 +29,86 @@ let html = {
             var snapshot = await db.once('value');
             if (snapshot.exists()) {
                 db.get().then(function(childSnapshot) {
-                    let artWorkArray = childSnapshot.val()
-                    console.log(artWorkArray)
-                    console.log(childSnapshot.numChildren())
-                    for (var i = 0; i < childSnapshot.numChildren(); i++) {
-                        console.log('created card')
-                        createPostCard(artWorkArray[i]);
-                        console.log(artWorkArray[i])
+                    // let artWorkArray = childSnapshot.val()
+                    // console.log(artWorkArray)
+                    // console.log(childSnapshot.numChildren())
+                    // let amountOfPosts = childSnapshot.numChildren()
+                    // if (amountOfPosts === 1) {
+                    //     createPostCard(artWorkArray[0], 0);
+                    //     amountOfArt = amountOfArt + 1;
+
+                    // } else {
+                    //     for (var i = 0; i < amountOfPosts; i++) {
+                    //         console.log('created card')
+                    //         createPostCard(artWorkArray[i], i);
+                    //         console.log(artWorkArray[i])
+                    //         amountOfArt = amountOfArt + 1;
+                    //     }
+                    // }
+
+                    //* this is more elegant!
+                    childSnapshot.forEach(function(snapshot) {
+                        console.log(snapshot.val().name)
+                        createPostCard(snapshot.val().title, snapshot.val().name, snapshot.val().url, snapshot.val().id);
                         amountOfArt = amountOfArt + 1;
-                    }
+
+                    })
+
                 });
 
                 console.log(posts)
                 let cardContainer;
 
-                let createPostCard = (task) => {
+                let createPostCard = (_title, _name, _imgurl, _id) => {
 
                     let card = document.createElement('div');
-                    card.className = 'card shadow cursor-pointer';
+                    card.className = 'card';
 
                     let cardBody = document.createElement('div');
                     cardBody.className = 'card-body';
 
                     let title = document.createElement('h5');
-                    title.innerText = "Title: " + task.title;
+                    title.innerText = "Title: " + _title;
                     title.className = 'card-title';
+                    title.style = 'margin-top: 1%;'
+
+                    let divide = document.createElement("HR");
 
                     let name = document.createElement('div');
-                    name.innerText = "Created by: " + task.name;
-                    name.className = 'card-name';
+                    name.innerText = "Created by: " + _name;
+                    name.className = 'card-text';
 
 
                     let image = document.createElement('img');
-                    image.src = task.url;
-                    image.className = 'card-image';
+                    image.src = _imgurl;
+                    image.className = 'card-img-top ';
+
+                    let editButton = document.createElement('button')
+                    editButton.className = 'btn btn-primary'
+                    editButton.innerText = 'Edit Post'
+                    editButton.style = 'margin-top: 1%'
+                    editButton.onclick = function() {
+                        console.log("Edit post")
+                    };
+
+                    let deleteButton = document.createElement('button')
+                    deleteButton.className = 'btn btn-danger'
+                    deleteButton.innerText = 'Delete Post'
+                    deleteButton.style = 'margin-top: 1%; margin-left: 1%'
+                    deleteButton.onclick = function() {
+                        firebase.database().ref('users/' + client.uid + '/artwork/' + _id).set({
+
+                        });
+                    };
+
+                    // editButton.onclick(console.log('hi'))
 
                     cardBody.appendChild(image);
                     cardBody.appendChild(title);
                     cardBody.appendChild(name);
+                    cardBody.appendChild(divide);
+                    cardBody.appendChild(editButton);
+                    cardBody.appendChild(deleteButton);
 
                     card.appendChild(cardBody);
                     cardContainer.appendChild(card);
@@ -88,6 +129,8 @@ let html = {
                 };
                 initListOfTasks();
 
+            } else {
+                document.getElementById('bumper').style = 'display: block;'
             }
 
         }

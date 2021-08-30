@@ -8,7 +8,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 let fb_uploadHandler = {
-    upload: function() {
+    upload: function(_cameraUpload, _localURI) {
         // html variables
         let artName = document.getElementById('artworkname').value
         let artAuthor = document.getElementById('artworkauthor').value
@@ -16,7 +16,11 @@ let fb_uploadHandler = {
 
         // file url
         let artFileURL;
-        uploadImage(artFile)
+        if (_cameraUpload) {
+            uploadImage(_localURI)
+        } else {
+            uploadImage(artFile)
+        }
 
         async function uploadImage(_artFile) {
             alert.artwork()
@@ -42,6 +46,7 @@ let fb_uploadHandler = {
                 title: artName,
                 name: artAuthor,
                 url: artFileURL,
+                id: id
             });
             console.log('uploaded image')
             swal.close();
