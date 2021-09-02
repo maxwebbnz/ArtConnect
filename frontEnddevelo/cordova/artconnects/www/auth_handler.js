@@ -8,6 +8,7 @@ let client;
 
 let auth = {
     login: function() {
+        alert.loading()
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 auth.handleSuccess(user, user.uid)
@@ -29,6 +30,7 @@ let auth = {
                             // The signed-in user info.
                             var user = result.user;
                             auth.handleSuccess(user, user.uid)
+                            swal.close()
                             console.log(user)
                         }).catch((error) => {
                             // Handle Errors here.
@@ -56,6 +58,7 @@ let auth = {
                 });
                 let tokenParse = _userToken
                 client = _userInformation;
+                console.log(client)
                 let uid = client.uid
                 html.update(client);
                 ui.hide('login')

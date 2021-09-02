@@ -4,18 +4,31 @@
  */
 
 let amountOfArt = 0;
+/**============================================
+ *               Regex's for Validation
+ *=============================================**/
+const textReg = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+// numReg only passes numbers, nothing else + characters
+const numReg = /^\d+$/;
+// designed to check for emails
+const emailReg = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+// this checks for white space, and a proper email address!
+const nameReg = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
 
 let html = {
     update: function(_info1, _info2) {
         const USERHTML = document.getElementById('clientNAME')
         const USEREMAIL = document.getElementById('clientEMAIL')
         const USERPRORFILEPIC = document.getElementById('clientPROFILEPIC')
+        const AUTHCONTENT = document.getElementById('authContent')
         USERHTML.innerHTML = _info1.name
             // USEREMAIL.innerHTML = _info1.email
             // USERPRORFILEPIC.src = _info1.profileURL
             // generate posts automatically
         const POSTDOMELEMENT = document.getElementById("card-container");
         POSTDOMELEMENT.innerHTML = '';
+        document.getElementById('bumper').style = 'display: none;'
+        AUTHCONTENT.style = 'display: block;'
         this.createCards()
     },
 
@@ -49,7 +62,7 @@ let html = {
                     //* this is more elegant!
                     childSnapshot.forEach(function(snapshot) {
                         console.log(snapshot.val().name)
-                        createPostCard(snapshot.val().title, snapshot.val().name, snapshot.val().url, snapshot.val().id);
+                        createPostCard(snapshot.val().title, snapshot.val().author, snapshot.val().url, snapshot.val().likes, snapshot.val().id);
                         amountOfArt = amountOfArt + 1;
 
                     })
@@ -59,7 +72,7 @@ let html = {
                 console.log(posts)
                 let cardContainer;
 
-                let createPostCard = (_title, _name, _imgurl, _id) => {
+                let createPostCard = (_title, _name, _imgurl, _likes, _id) => {
 
                     let card = document.createElement('div');
                     card.className = 'card';
@@ -81,15 +94,54 @@ let html = {
 
                     let image = document.createElement('img');
                     image.src = _imgurl;
-                    image.className = 'card-img-top ';
+                    image.className = 'card-img-top';
+
+                    let likes = document.createElement('i')
+                    likes.className = 'bi bi-star'
+
+                    let likesAmmount = document.createElement('span')
+                    likesAmmount.innerText = " - " + _likes + ' likes'
+
 
                     let editButton = document.createElement('button')
                     editButton.className = 'btn btn-primary'
                     editButton.innerText = 'Edit Post'
                     editButton.style = 'margin-top: 1%'
                     editButton.onclick = function() {
-                        console.log("Edit post")
-                    };
+                        Swal.mixin({
+                            input: 'text',
+                            confirmButtonText: 'Next &rarr;',
+                            showCancelButton: true,
+                            progressSteps: ['1', '2']
+                        }).queue([{
+                                title: 'Post Title',
+                                text: 'Please enter correct information'
+                            },
+                            'Author',
+                        ]).then((result) => {
+                            if (result.value) {
+                                if (validate.text(result.value[0]) && validate.text(result.value[1])) {
+                                    console.log(result.value)
+                                    firebase.database().ref('users/' + client.uid + '/artwork/' + _id).update({
+                                        title: result.value[0],
+                                        author: result.value[1],
+                                    });
+                                    Swal.fire({
+                                        title: 'Post Updated!',
+                                        confirmButtonText: 'Lovely!'
+                                    })
+                                    html.update(client)
+                                } else {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Error!',
+                                        text: "Information was incorrectly entered",
+
+                                    })
+                                }
+                            }
+                        })
+                    }
 
                     let deleteButton = document.createElement('button')
                     deleteButton.className = 'btn btn-danger'
@@ -99,13 +151,18 @@ let html = {
                         firebase.database().ref('users/' + client.uid + '/artwork/' + _id).set({
 
                         });
+                        alert.success("Deleted Post!", "deletedPost")
+                        html.update(client)
+
                     };
 
-                    // editButton.onclick(console.log('hi'))
 
                     cardBody.appendChild(image);
                     cardBody.appendChild(title);
                     cardBody.appendChild(name);
+                    cardBody.appendChild(likes)
+                    cardBody.appendChild(likesAmmount)
+                        // cardBody.appendChild(cardLikes)
                     cardBody.appendChild(divide);
                     cardBody.appendChild(editButton);
                     cardBody.appendChild(deleteButton);
@@ -263,5 +320,100 @@ let alert = {
             timerProgressBar: true,
             timer: 100000
         })
+    },
+    /**========================================================================
+     **                           Loading
+     *?  Generates a loading alert (mostly used in auth processes)
+     *========================================================================**/
+    loading: function() {
+        Swal.fire({
+            position: 'center',
+            title: 'Loading',
+            showConfirmButton: false,
+            timerProgressBar: false,
+            timer: 100000
+        })
+    }
+}
+
+// validate shit
+
+/*
+ * Copyright (c) 2021 Max Webb
+ * All rights reserved.
+ */
+
+
+let editorInputs;
+let editorOpen = false;
+
+
+/**================================================================================================
+ *                                         Validation Module
+ *================================================================================================**/
+let validate = {
+    /**========================================================================
+     **                           Text Validation
+     *?   Checks a string with the textRegex and tests it
+     *@param name type  
+     *@param textReg regex  
+     *@param _str string  
+     *@return bool
+     *========================================================================**/
+    text: function(_str) {
+        if (textReg.test(_str)) {
+            // If string parsed through matches the nameReg-ex
+            return true
+                // return true
+        } else {
+            // else if it does not match
+            return false
+                // return false
+        }
+    },
+    /**========================================================================
+     **                           Name Vaildation
+     *?   Checks a string with the nameRegex and tests it
+     *@param name type  
+     *@param name type  
+     *@return type
+     *========================================================================**/
+    nameSpecfic: function(str) {
+        if (nameReg.test(str)) {
+            // If string parsed through matches the nameReg-ex
+            return true
+                // return true
+        } else {
+            // else if it does not match
+            return false
+                // return false    
+        }
+    },
+    /*
+  Function Name: num
+  Purpose: Vaildating numeric input
+  */
+    num: function(str) {
+        // Num vaildation
+        if (numReg.test(str)) {
+            // If string parsed through matches the numReg-ex
+            return true
+                // return true
+        } else {
+            // else if does not match
+            return false
+                // return false
+        }
+    },
+    /*
+  Function Name: email
+  Purpose: Vaildating email input
+  */
+    email: function(str) {
+        if (emailReg.test(str)) {
+            return true;
+        } else {
+            return false
+        }
     }
 }

@@ -38,9 +38,9 @@
       "cordova-universal-links-plugin": {}
     },
     "platforms": [
-      "ios",
       "browser",
-      "android"
+      "android",
+      "ios"
     ]
   },
   "dependencies": {

@@ -35,12 +35,11 @@ var firebaseConfig = {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-    console.log(navigator.camera);
-    console.log(cordova.file);
-    document.getElementById("captureImage").addEventListener("click", captureImage);
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    } else {
-        firebase.app(); // if already initialized, use that one
-    }
+    // console.log(navigator.camera);
+    // console.log(cordova.file);
+    // document.getElementById("captureImage").addEventListener("click", captureImage);
+    firebase.initializeApp(firebaseConfig);
+    window.open = cordova.InAppBrowser.open;
+    console.log('device ready')
+
 }
