@@ -40,14 +40,14 @@ let fb_uploadHandler = {
                 })
                 // FETCH amount of work
 
-            let id = amountOfArt;
+            let newId = amountOfArt + 1;
 
-            firebase.database().ref('users/' + client.uid + '/artwork/' + id).update({
+            firebase.database().ref('users/' + client.uid + '/artwork/' + newId).update({
                 title: artName,
                 author: artAuthor,
                 url: artFileURL,
                 likes: 0,
-                id: id
+                id: newId
             });
             console.log('uploaded image')
             swal.close();

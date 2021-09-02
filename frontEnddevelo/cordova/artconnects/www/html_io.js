@@ -4,6 +4,36 @@
  */
 
 let amountOfArt = 0;
+
+var loginMixin = Swal.mixin({
+    toast: true,
+    icon: 'success',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
+var loadingMixin = Swal.mixin({
+    toast: true,
+    icon: 'info',
+    title: 'General Title',
+    animation: true,
+    position: 'top-right',
+    showConfirmButton: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
+
 /**============================================
  *               Regex's for Validation
  *=============================================**/
@@ -92,9 +122,21 @@ let html = {
                     name.className = 'card-text';
 
 
-                    let image = document.createElement('img');
-                    image.src = _imgurl;
-                    image.className = 'card-img-top';
+                    let image = document.createElement('div');
+                    let imageContent = document.createElement('img')
+                    imageContent.src = _imgurl;
+                    imageContent.className = 'card-img-top';
+                    image.appendChild(imageContent)
+                        // let loader = document.createElement('div')
+                        // loader.className = 'spinner-border text-primary'
+                        // loader.role = 'status'
+                        // image.appendChild(loader)
+
+                    // if (!imageContent.complete || imageContent.naturalWidth !== 0) {
+                    //     console.log('hello')
+                    //     image.removeChild(loader)
+                    // }
+
 
                     let likes = document.createElement('i')
                     likes.className = 'bi bi-star'
@@ -280,14 +322,10 @@ let alert = {
      *========================================================================**/
     authSuccess: function() {
         console.log("alert.authSuccess | User Successfully logged in, now showing success information", 'info')
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Woohoo! You logged in!',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 1600
-        })
+        loginMixin.fire({
+            animation: true,
+            title: 'Signed in Successfully'
+        });
     },
     /**========================================================================
      **                           Success Dismissed
@@ -326,13 +364,10 @@ let alert = {
      *?  Generates a loading alert (mostly used in auth processes)
      *========================================================================**/
     loading: function() {
-        Swal.fire({
-            position: 'center',
-            title: 'Loading',
-            showConfirmButton: false,
-            timerProgressBar: false,
-            timer: 100000
-        })
+        loadingMixin.fire({
+            animation: true,
+            title: 'Loading'
+        });
     }
 }
 
