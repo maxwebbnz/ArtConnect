@@ -49,8 +49,10 @@ let html = {
     update: function(_info1, _info2) {
         const USERHTML = document.getElementById('clientNAME')
         const USEREMAIL = document.getElementById('clientEMAIL')
-        const USERPRORFILEPIC = document.getElementById('clientPROFILEPIC')
         const AUTHCONTENT = document.getElementById('authContent')
+        const USERICON = document.getElementById('userIcon')
+        const USERAVATAR = document.getElementById('userAvatar')
+        const LOGOUT = document.getElementById('logout')
         USERHTML.innerHTML = _info1.name
             // USEREMAIL.innerHTML = _info1.email
             // USERPRORFILEPIC.src = _info1.profileURL
@@ -59,6 +61,9 @@ let html = {
         POSTDOMELEMENT.innerHTML = '';
         document.getElementById('bumper').style = 'display: none;'
         AUTHCONTENT.style = 'display: block;'
+        USERICON.style = 'display: block;'
+            // USERAVATAR.style = 'display: block;'
+        LOGOUT.style = 'display: block;'
         this.createCards()
     },
 
@@ -168,6 +173,10 @@ let html = {
                                         title: result.value[0],
                                         author: result.value[1],
                                     });
+                                    firebase.database().ref('artwork/' + client.uid + '/' + _id).update({
+                                        title: result.value[0],
+                                        author: result.value[1],
+                                    });
                                     Swal.fire({
                                         title: 'Post Updated!',
                                         confirmButtonText: 'Lovely!'
@@ -191,6 +200,10 @@ let html = {
                     deleteButton.style = 'margin-top: 1%; margin-left: 1%'
                     deleteButton.onclick = function() {
                         firebase.database().ref('users/' + client.uid + '/artwork/' + _id).set({
+
+                        });
+
+                        firebase.database().ref('artwork/' + client.uid + '/' + _id).update({
 
                         });
                         alert.success("Deleted Post!", "deletedPost")

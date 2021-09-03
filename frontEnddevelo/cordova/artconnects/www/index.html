@@ -41,9 +41,15 @@
 </head>
 <header>
     <nav class="navbar navbar-expand navbar-light bg-light">
-        <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="#">ArtConnect <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" id="authContent" style="display: none" onclick="ui.show('form')">Upload ArtWork</a>
+        <div class="container-fluid">
+            <div class="nav navbar-nav">
+                <a class="nav-item nav-link active" href="#">ArtConnect <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" id="authContent" style="display: none" onclick="ui.show('form')">Upload ArtWork</a>
+            </div>
+            <div id="userIcon" class="d-flex">
+                <!-- <img id="userAvatar" style="margin-right: 10px; display: none;" class="rounded-circle" width="20px" height="20px"></img> -->
+                <span id="logout" style="display: none;" onclick="auth.logout()">Log Out</span>
+            </div>
         </div>
     </nav>
 </header>
@@ -82,7 +88,7 @@
                 <input class="form-control" id="artworktags">
             </div>
             <input class="form-control" type="file" id="photo">
-            <!-- redacted -- doesn't need to be here :D -->
+            <!-- removed -- doesn't need to be here :D -->
             <!-- <button style="margin-top: 20px" type='button' id="btn" class="btn btn-primary">Take Photo</button>
             <button id="captureImage">SHOT</button> -->
 
@@ -172,6 +178,9 @@
         margin-top: 30%;
         color: white;
     }
+    /* #authContent {
+        display: none;
+    } */
 </style>
 
 <script>

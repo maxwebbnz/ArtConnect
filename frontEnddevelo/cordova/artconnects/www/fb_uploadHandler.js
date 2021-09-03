@@ -49,6 +49,15 @@ let fb_uploadHandler = {
                 likes: 0,
                 id: newId
             });
+
+
+            firebase.database().ref('artwork/' + client.uid + '/' + newId).update({
+                title: artName,
+                author: artAuthor,
+                url: artFileURL,
+                likes: 0,
+                id: newId
+            });
             console.log('uploaded image')
             swal.close();
             alert.success("Successfully uploaded your art work!")
