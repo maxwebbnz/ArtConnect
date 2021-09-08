@@ -13,9 +13,8 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
-    "cordova-android": "^10.0.0",
+    "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
-    "cordova-ios": "^6.2.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -39,8 +38,7 @@
     },
     "platforms": [
       "browser",
-      "android",
-      "ios"
+      "android"
     ]
   },
   "dependencies": {
