@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.webbm.artconnects" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ArtConnect</name>
+    <description>
+        ArtConnect is a platform to upload and manage artwork created to view on the presenter.
+    </description>
+    <author email="maxwebblighting@gmail.com" href="http://webbm.xyz">
+        Max Webb
+    </author>
+    <icon src="/icons/web_hi_res_512.png" />
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-navigation href="http://*" />
+    <allow-navigation href="https://*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <universal-links>
+        <host name="artconnect.page.link" scheme="https" />
+        <host name="dtec-artconnect.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback" />
+        </host>
+    </universal-links>
+    <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
+    <preference name="OverrideUserAgent" value="Mozilla/5.0 Google" />
+    <preference name="android-minSdkVersion" value="31" />
+    <preference name="android-targetSdkVersion" value="31" />
+</widget>

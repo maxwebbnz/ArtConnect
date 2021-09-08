@@ -3,5 +3,5 @@
 
 
 #Firebase config
-/www/fb_init.js
-config.xml
+mobile/artconnects/www/fb_init.js
+mobile/artconnects/config.xml
