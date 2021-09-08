@@ -1,0 +1,17 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "ArtConnect",
+  "short_name": "ArtConnect",
+  "version": "com.webbm.artconnects",
+  "description": "ArtConnect is a platform to upload and manage artwork created to view on the presenter.",
+  "author": "Max Webb",
+  "icons": [
+    {
+      "src": "/icons/web_hi_res_512.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "start_url": "index.html"
+}

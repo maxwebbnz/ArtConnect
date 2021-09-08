@@ -1,0 +1,37 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "com.webbm.artconnects",
+      "ANDROID_SCHEME": " ",
+      "ANDROID_HOST": " ",
+      "ANDROID_PATHPREFIX": "/",
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    },
+    "cordova-universal-links-plugin": {
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.webbm.artconnects"
+    }
+  },
+  "dependent_plugins": {}
+}
