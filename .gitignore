@@ -1,4 +1,8 @@
 .DS_Store
 
-ArtConnect-v1/mobile/artconnects/www/fb_init.js
-/mobile/artconnects/config.xml
+
+
+#Firebase config
+mobile/artconnects/www/fb_init.js
+mobile/artconnects/www/index.js
+mobile/artconnects/config.xml
