@@ -6,3 +6,6 @@
 mobile/artconnects/www/fb_init.js
 mobile/artconnects/www/index.js
 mobile/artconnects/config.xml
+mobile/artconnects/plugins
+mobile/artconnects/platforms
+mobile/artconnects/ul_web_hooks

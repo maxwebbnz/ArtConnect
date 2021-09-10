@@ -16,6 +16,7 @@
     <!-- CDN for aFrame Gui -->
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <script src="https://unpkg.com/aframe-room-component/dist/aframe-room-component.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Scripts for Firebase -->
     <!-- <script src="firebase/init.js"></script>
@@ -24,31 +25,62 @@
     <script src="firebase/auth.js"></script>
     <!-- Scripts for aFrame Appending -->
     <!-- <script src="js/artwork.js"></script> -->
+    <!-- Logical Components for Paintings -->
+    <script src="js/artwork_logic.js"></script>
+    <script src="js/fb_logic.js"></script>
 
 
 </head>
 
 <body>
     <a-scene>
-        <rw-room position="-2 0 -2" material="color:#866">
-            <rw-wall position="4 0 0"></rw-wall>
-            <rw-wall position="4 0 4"></rw-wall>
-            <rw-wall position="0 0 4"></rw-wall>
-            <rw-wall position="0 0 0">
-                <rw-doorhole id="holeA"></rw-doorhole>
-                <rw-doorlink from="#holeA" to="#holeB" position="2.5 0 0"></rw-doorlink>
-            </rw-wall>
-        </rw-room>
-        <rw-room position="0 0 -3">
-            <rw-wall position=" 1 0 -1" material="color:#787"></rw-wall>
-            <rw-wall position=" 1 0  1" material="color:#877">
-                <rw-doorhole id="holeB"></rw-doorhole>
-            </rw-wall>
-            <rw-wall position="-1 0  1" material="color:#878"></rw-wall>
-            <rw-wall position="-1 0 -1" material="color:#778"></rw-wall>
-        </rw-room>
+        <!-- Assests -->
+        <a-assets>
+            <img id="sky" src="https://st4.depositphotos.com/1000633/21871/i/600/depositphotos_218714768-stock-photo-blue-sky-panorama-clouds-summer.jpg"></img>
+            <img id="paintingone" src="assests/mat/maxwebbmeme.jpg" crossorigin="anonymous">
+            <img id="walls" src="assests/mat/woodDirtPlanks.jpg" crossorigin="anonymous">
+            <img id="floorTiles" src="assests/mat/floorTiles.jpg" crossorigin="anonymous">
+        </a-assets>
+        <!-- Camera -->
+        <a-entity camera="" position="0 1.02 4.80954" wasd-controls="acceleration: 20" rotation="-4.469070802020418 0 0" look-controls="" aframe-injected="" data-aframe-inspector-original-camera="" daydream-controls="hand: right" gearvr-controls="hand: right"
+            magicleap-controls="hand: right" oculus-go-controls="hand: right" oculus-touch-controls="hand: right" valve-index-controls="hand: right" vive-controls="hand: right" vive-focus-controls="hand: right" windows-motion-controls="" generic-tracked-controller-controls="hand: right"
+            laser-controls="" rotation-reader>
+        </a-entity>
+        <!-- Camera + cursor. -->
+        <a-entity id="cameraRig" position="0 1.02 4.80954">
+            <a-camera look-controls wasd-controls position="0 0 0">
+                <a-gui-cursor id="cursor" raycaster="objects: [gui-interactable]" fuse="true" fuse-timeout="2000" color="#ECEFF1" hover-color="#CFD8DC" active-color="#607D8B" design="ring">
+                    <!-- dot, ring, reticle, cross  -->
+                </a-gui-cursor>
+                <!-- /cursor -->
+            </a-camera>
+            <!-- /camera -->
+        </a-entity>
+        <a-sky src="#sky"></a-sky>
+        <!-- Main Scene *or* Gallery -->
+        <a-entity id="scene1">
+            <a-entity id="room">
+                <a-plane src="#floorTiles" material="" geometry="" rotation="-90 0 0" scale="10 10 1" id="floor"></a-plane>
+                <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 90 0" scale="10 10 1" id="leftwall" position="-4.673 0.735 0"></a-plane>
+                <a-plane src="#walls" wallbounds material="" src="#walls" geometry="" rotation="" scale="10 10.28 1" id="centerwall" position="0 0.73469 -5.33347"></a-plane>
+                <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 0.754 -0.59173"></a-plane>
+                <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 0.754 -0.59173"></a-plane>
+            </a-entity>
+            <!-- <a-entity id="welcomeText" camera="active: false" look-controls="" position="-0.09772 3.71411 1.25945" rotation="9.625690958197826 0.34377467707849335 0">
+                <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" material="color: #1100ff; opacity: 0.5" scale="10.79 2.92 1"></a-entity>
+                <a-text text="letterSpacing: -0.28; value: ArtConnect; text-align:center;" position="-0.88 0.03 0"></a-text>
+            </a-entity> -->
+            <a-entity id="paintings">
+
+            </a-entity>
+
+        </a-entity>
     </a-scene>
 </body>
 
+<script>
+    document.getElementById('scene1').setAttribute('visible', 'true')
+        // document.getElementById('scene2').setAttribute('visible', 'false')
+</script>
 
 </html>

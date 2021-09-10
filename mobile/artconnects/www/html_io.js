@@ -173,7 +173,7 @@ let html = {
                                         title: result.value[0],
                                         author: result.value[1],
                                     });
-                                    firebase.database().ref('artwork/' + client.uid + '/' + _id).update({
+                                    firebase.database().ref('artwork/' + client.uid + '-' + _id).update({
                                         title: result.value[0],
                                         author: result.value[1],
                                     });
@@ -203,7 +203,7 @@ let html = {
 
                         });
 
-                        firebase.database().ref('artwork/' + client.uid + '/' + _id).update({
+                        firebase.database().ref('artwork/' + client.uid + '-' + _id).update({
 
                         });
                         alert.success("Deleted Post!", "deletedPost")
