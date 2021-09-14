@@ -11,6 +11,7 @@ $(document).ready(function() {
     fb.read()
 });
 
+let artWorkPositionsActual = []
 let artWorkPositions = [-3.621, -2.136, -0.669, 0.988, 3.425]
 
 let artWork = {
@@ -23,15 +24,17 @@ let artWork = {
         console.log('hello')
         let min = -3.733
         let max = 3.864
-        let randomXPos = artWorkPositions[Math.floor(Math.random() * artWorkPositions.length * 1)];
+        let randomXPos = artWorkPositions[Math.floor(Math.random() * artWorkPositions.length)];
         // console.log(artWorks[i].id.authorOfArt)
         sceneEl = document.getElementById('paintings');
         var planeId = document.createElement('a-plane');
         planeId.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/dtec-artconnect.appspot.com/o/1631146051434-5ke8r7yahqg11.jpg?alt=media&token=3e413b8d-3799-409c-a729-cf6cc7362742');
         planeId.setAttribute('id', artObjec.id);
-        planeId.setAttribute('position', randomXPos + ' 1.47 -4.4265')
+        let pos = randomXPos + ' 1.47 -4.4265'
+        planeId.setAttribute('position', pos)
         sceneEl.appendChild(planeId);
-        // Add in Artwork Info Plane
+        artWorkPositionsActual.push(parseFloat(pos))
+            // Add in Artwork Info Plane
         var artWorkInfo = document.createElement('a-plane');
         artWorkInfo.setAttribute('id', artObjec.id + '-infoPlane');
         artWorkInfo.setAttribute('position', randomXPos + ' 0.613 -4.4265')
