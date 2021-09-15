@@ -261,6 +261,7 @@ let ui = {
             document.getElementById('register').style = 'display: block';
         } else {
             document.getElementById(_page).style = 'display: block;'
+            docume
         }
     },
     hide: function(_page) {
