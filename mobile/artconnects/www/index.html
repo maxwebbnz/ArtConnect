@@ -56,11 +56,14 @@
 </header>
 
 <body>
-    <div id="login">
-        <h2>Welcome to ArtConnect</h2>
-        <hr>
-        <h4>Please login below</h4>
-        <button type="button" class="btn btn-primary" onclick="auth.login()"><i class="bi bi-google"></i> Login with Google </button>
+    <div class="d-flex justify-content-center">
+        <div id="login">
+            <img src="img/web_hi_res_512.png" alt="ArtConnect" width="100" style="border-radius: 20px; padding-bottom: 10px;">
+            <h2>Welcome to ArtConnect</h2>
+            <hr>
+            <h4>Please login below</h4>
+            <button type="button" class="btn btn-primary" onclick="auth.login()"><i class="bi bi-google"></i> Login with Google </button>
+        </div>
     </div>
     <div id="welcomePage">
         <h2>Welcome, <span id="clientNAME"></span></h2>
@@ -133,10 +136,20 @@
     }
     
     #login {
-        display: block;
+        /* display: block; */
         text-align: center;
-        margin-top: 70%;
+        margin-top: 60%;
+        display: inline-block;
+        vertical-align: middle;
         color: white;
+        background-color: grey;
+        height: 280px;
+        padding-top: 25px;
+        border-radius: 20px;
+        width: 90%;
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
     }
     
     #register {
@@ -182,6 +195,18 @@
     /* #authContent {
         display: none;
     } */
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 </style>
 
 <script>

@@ -24,12 +24,14 @@ let artWork = {
         console.log('hello')
         let min = -3.733
         let max = 3.864
-        let randomXPos = artWorkPositions[Math.floor(Math.random() * artWorkPositions.length)];
+        let randomXPos = artWorkPositions[Math.floor(Math.random() * artWorkPositions.length + Math.random())];
         // console.log(artWorks[i].id.authorOfArt)
         sceneEl = document.getElementById('paintings');
         var planeId = document.createElement('a-plane');
         planeId.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/dtec-artconnect.appspot.com/o/1631146051434-5ke8r7yahqg11.jpg?alt=media&token=3e413b8d-3799-409c-a729-cf6cc7362742');
         planeId.setAttribute('id', artObjec.id);
+        console.log(artObjec.id)
+        planeId.setAttribute('class', 'generatedartwork');
         let pos = randomXPos + ' 1.47 -4.4265'
         planeId.setAttribute('position', pos)
         sceneEl.appendChild(planeId);
