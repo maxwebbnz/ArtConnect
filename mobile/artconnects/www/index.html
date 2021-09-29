@@ -1,7 +1,4 @@
 <!-- /* * Copyright (c) 2021 Max Webb * All rights reserved. */ -->
-<meta charset="UTF-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here" />
 <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: ms-appdata: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
 
@@ -13,6 +10,9 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script src="cordova.js"></script>
 <!-- <script src="https://unpkg.com/cordova@2.5.0/cordova.js"></script> -->
+<!-- Draw -->
+<!-- <script src="painterro-1.2.66.min.js"></script> -->
+<script src="download.js"></script>
 
 <script src="index.js"></script>
 <!--   Ui -->
@@ -26,6 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
+<script src="html_io.js"></script>
 
 <title>ArtConnect</title>
 <!-- FB local code -->
@@ -33,9 +34,12 @@
 <script src="auth_handler.js"></script>
 <script src="fb_uploadHandler.js"></script>
 <!-- HTML IO -->
-<script src="html_io.js"></script>
 <!-- Camera Handling -->
 <script src="camera.js"></script>
+
+<script>
+    // Initialize Firebase
+</script>
 </head>
 <header>
     <nav class="navbar navbar-expand navbar-light bg-light">
@@ -43,6 +47,7 @@
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active" href="#">ArtConnect <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" id="authContent" style="display: none" onclick="ui.show('form')">Upload ArtWork</a>
+                <a class="nav-item nav-link" id="authContent" style="display: block" onclick="ui.show('draw')">Draw ArtWork</a>
             </div>
             <div id="userIcon" class="d-flex">
                 <!-- <img id="userAvatar" style="margin-right: 10px; display: none;" class="rounded-circle" width="20px" height="20px"></img> -->
@@ -211,5 +216,34 @@
 <script>
     function onLoad() {
         document.addEventListener("deviceready", onDeviceReady, false);
+
     }
+
+    // ptro.show();
+    document.onpaste = (event) => {
+        const {
+            items
+        } = event.clipboardData || event.originalEvent.clipboardData;
+        Array.from(items).forEach((item) => {
+            if (item.kind === 'file') {
+                if (!window.painterroOpenedInstance) {
+                    // if painterro already opened - it will handle onpaste
+                    const blob = item.getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = (readerEvent) => {
+                        window.painterroOpenedInstance = Painterro({
+                            onHide: () => {
+                                window.painterroOpenedInstance = undefined;
+                            },
+                            saveHandler: (image, done) => {
+                                console.log('Save it here', image.asDataURL()); // you could provide your save handler
+                                done(true);
+                            },
+                        }).show(readerEvent.target.result, item.type);
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+    };
 </script>

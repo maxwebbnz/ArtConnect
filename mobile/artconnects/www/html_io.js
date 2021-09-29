@@ -259,15 +259,26 @@ let ui = {
         } else if (_page == 'register') {
             document.getElementById('login').style = 'display: none';
             document.getElementById('register').style = 'display: block';
+        } else if (_page == 'draw') {
+            ptro.show();
+
         } else {
             document.getElementById(_page).style = 'display: block;'
-            docume
+                // docume
         }
     },
     hide: function(_page) {
         document.getElementById(_page).style = 'display: none;'
     }
 }
+
+
+// var ptro = Painterro({
+//     saveHandler: function(image) {
+//         download(image, 'testimage.jpg', "image/jpeg")
+//     },
+//     activeColor: '#00b400' // change active color to green
+// });
 
 /*
  * Copyright (c) 2021 Max Webb

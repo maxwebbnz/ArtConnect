@@ -115,35 +115,37 @@ var pos = [
 
 let artWorkPositionsActual = []
     // let artWorkPositions = [-3.621, -2.136, -0.669, 0.988, 3.425]
-let artworks = [{
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, {
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, {
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, {
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, {
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, {
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, {
-    id: 1,
-    author: "MJW",
-    name: "This is a cool painting",
-}, ]
+    // let artworks = [{
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, {
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, {
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, {
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, {
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, {
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, {
+    //     id: 1,
+    //     author: "MJW",
+    //     name: "This is a cool painting",
+    // }, ]
+
+let artworks = []
 let artWork = {
     /**========================================================================
      **                           artWork.add
@@ -205,8 +207,7 @@ let artWork = {
             artworks[i].r1 = ap[0].rotation1
             artworks[i].r2 = ap[0].rotation2
             artworks[i].r3 = ap[0].rotation3
-
-            // console.log(b.x);
+                // console.log(b.x);
         }
     },
     generate: function() {
@@ -217,7 +218,8 @@ let artWork = {
             var planeId = document.createElement('a-plane');
             // planeId.setAttribute('src', 'https://firebasestorage.googleapis.com/v0/b/dtec-artconnect.appspot.com/o/1631146051434-5ke8r7yahqg11.jpg?alt=media&token=3e413b8d-3799-409c-a729-cf6cc7362742');
             planeId.setAttribute('id', artworks[i].id);
-            planeId.setAttribute('color', '255 255 ' + Math.floor(Math.random() * 255));
+            planeId.setAttribute('src', artworks[i].url);
+            // planeId.setAttribute('color', '255 255 ' + Math.floor(Math.random() * 255));
             console.log(artworks[i].id)
             planeId.setAttribute('class', 'generatedartwork');
             // let pos = randomXPos + ' 1.47 -4.4265'
