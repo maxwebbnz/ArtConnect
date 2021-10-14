@@ -51,6 +51,8 @@ fb.read = function() {
                 artworks.push(artObject)
                 console.log(artworks)
             })
+            artWork.generate()
+            swal.close()
         });
 
 }
