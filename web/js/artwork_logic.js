@@ -516,8 +516,25 @@ let artWork = {
             infoText.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + '0')
             infoText.setAttribute('scale', artworks[i].titles1 + ' ' + artworks[i].titles2 + ' ' + artworks[i].titles3)
             infoText.setAttribute('material', 'color: black;')
+            infoText.setAttribute('artwork', 'id:' + artworks[i].id + '; likes:' + artworks[i].likes)
             infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value: Likes: ' + artworks[i].likes)
             sceneEl.appendChild(infoText);
+            AFRAME.registerComponent('artwork', {
+                schema: {
+                    id: { default: 'default' },
+                    likes: { type: 'int', default: 'default' }
+                },
+                init: function() {
+                    var data = this.data;
+                    var el = this.el;
+                    let newLikes = data.likes + 1;
+                    el.addEventListener('click', function() {
+                        console.log(data.id);
+                        el.setAttribute('artwork', 'id:' + data.id + '; likes:' + newLikes)
+                        fb.like(data.id, data.likes)
+                    });
+                }
+            });
             // // Author
             // var infoText_author = document.createElement('a-text');
             // infoText_author.setAttribute('id', artworks[i].id);

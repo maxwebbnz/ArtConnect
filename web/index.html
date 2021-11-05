@@ -33,6 +33,7 @@
     <!-- <script src="js/artwork.js"></script> -->
     <!-- Logical Components for Paintings -->
     <script src="js/artwork_logic.js"></script>
+
     <script src="js/fb_logic.js"></script>
     <script src="js/mobile_port.js"></script>
 
@@ -46,6 +47,7 @@
             <img id="paintingone" src="assests/mat/maxwebbmeme.jpg" crossorigin="anonymous">
             <img id="walls" src="assests/mat/woodDirtPlanks.jpg" crossorigin="anonymous">
             <img id="floorTiles" src="assests/mat/floorTiles.jpg" crossorigin="anonymous">
+            <audio id="click-sound" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         </a-assets>
         <!-- Camera -->
         <a-entity camera="" position="0 1.02 4.80954" wasd-controls="acceleration: 20" rotation="-4.469070802020418 0 0" look-controls="" aframe-injected="" data-aframe-inspector-original-camera="" daydream-controls="hand: right" gearvr-controls="hand: right"
@@ -53,15 +55,9 @@
             laser-controls="" rotation-reader>
         </a-entity>
         <!-- Camera + cursor. -->
-        <a-entity id="cameraRig" position="0 1.02 4.80954">
-            <a-camera look-controls wasd-controls position="0 0 0">
-                <a-gui-cursor id="cursor" raycaster="objects: [gui-interactable]" fuse="true" fuse-timeout="2000" color="#ECEFF1" hover-color="#CFD8DC" active-color="#607D8B" design="ring">
-                    <!-- dot, ring, reticle, cross  -->
-                </a-gui-cursor>
-                <!-- /cursor -->
-            </a-camera>
-            <!-- /camera -->
-        </a-entity>
+        <a-camera>
+            <a-cursor id="cursor" animation__click="property: scale; from: 0.1 0.1 0.1; to: 1 1 1; easing: easeInCubic; dur: 150; startEvents: click" animation__clickreset="property: scale; to: 0.1 0.1 0.1; dur: 1; startEvents: animationcomplete__click" animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing"></a-cursor>
+        </a-camera>
         <a-sky src="#sky"></a-sky>
         <!-- Main Scene *or* Gallery -->
         <a-entity id="scene1">
@@ -72,10 +68,6 @@
                 <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 0.754 -0.59173"></a-plane>
                 <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 0.754 -0.59173"></a-plane>
             </a-entity>
-            <!-- <a-entity id="welcomeText" camera="active: false" look-controls="" position="-0.09772 3.71411 1.25945" rotation="9.625690958197826 0.34377467707849335 0">
-                <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" material="color: #1100ff; opacity: 0.5" scale="10.79 2.92 1"></a-entity>
-                <a-text text="letterSpacing: -0.28; value: ArtConnect; text-align:center;" position="-0.88 0.03 0"></a-text>
-            </a-entity> -->
             <a-entity id="paintings">
                 <!-- <a-plane material="" geometry="" scale="1.67 0.45 1"></a-plane> -->
                 <!-- <a-plane material="" id="pln1" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
@@ -83,81 +75,7 @@
                 <a-text id="pln3" text="letterSpacing: -0.28; value: ArtConnect; text-align:center;" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-text>
                 <a-text id="pln4" text="letterSpacing: -0.28; value: Likes: 0 (press me); text-align:center;" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-text> -->
             </a-entity>
-            <!-- <a-entity id="testpainting" position="-4.53216 0 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-2.66 0 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-0.75 0 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="3.08 0 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="1.19 0 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="0.40835 0 4.59516" rotation="0 90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="0.49069 0 2.59311" rotation="0 90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="0.42037 0 0.68662" rotation="0 90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="0.35124 0 -1.32673" rotation="0 90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="0.36694 0 -3.18683" rotation="0 90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-0.03838 0 2.5593" rotation="0 -90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-0.06979 0 0.72214" rotation="0 -90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-0.4073 0.01592 -1.09021" rotation="0 -90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-0.29805 0.01601 -2.95357" rotation="0 -90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity>
-            <a-entity id="testpainting" position="-0.64545 0.03117 -4.77154" rotation="0 -90 0">
-                <a-plane material="" id="art" geometry="" scale="1.63 1.94 0.00001" position="0.8555 1.42463 -5"></a-plane>
-                <a-text id="title+author" text="letterSpacing: -0.28; value: ArtConnect; tabSize: 5.53" scale="0.78 0.97 0.00001" position="0.43764 2.6262 -5"></a-text>
-                <a-text id="likes" text="letterSpacing: -2.19; value: Likes: 0 (press me)" scale="0.78 0.9 0.00001" position="0.25762 0.24234 -5"></a-text>
-            </a-entity> -->
+
         </a-entity>
 
         </a-entity>

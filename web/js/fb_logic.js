@@ -56,3 +56,11 @@ fb.read = function() {
         });
 
 }
+
+fb.like = function(_id, _likesold) {
+    let newlikes = _likesold + 1;
+    firebase.database().ref('artwork/' + _id).update({
+        likes: newlikes,
+    });
+    console.log("UPDATED LIKES VALUE")
+}
