@@ -46,6 +46,7 @@ fb.read = function() {
                         "url": childSnapshot.child('url').val(),
                         "likes": childSnapshot.child('likes').val(),
                         "id": childSnapshot.key,
+                        "location": artworks.length + 1
                     }
                     // console.log(artObject)
                 artworks.push(artObject)
@@ -57,10 +58,10 @@ fb.read = function() {
 
 }
 
-fb.like = function(_id, _likesold) {
-    let newlikes = _likesold + 1;
-    firebase.database().ref('artwork/' + _id).update({
-        likes: newlikes,
-    });
-    console.log("UPDATED LIKES VALUE")
-}
+// fb.like = function(_id, _likesold) {
+//     let newlikes = _likesold + 1;
+//     firebase.database().ref('artwork/' + _id).update({
+//         likes: newlikes,
+//     });
+//     console.log("UPDATED LIKES VALUE")
+// }

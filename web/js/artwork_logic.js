@@ -341,7 +341,7 @@ var pos = [
     {
         "x": 4.993,
         "y": 1.42463,
-        "z": -4.292,
+        "z": -3.984,
         "s1": 1.630,
         "s2": 1.950,
         "s3": 0,
@@ -510,31 +510,35 @@ let artWork = {
             infoText.setAttribute('material', 'color: black;')
             infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value:' + artworks[i].title + ' by ' + artworks[i].author)
             sceneEl.appendChild(infoText);
-            var infoText = document.createElement('a-text');
-            infoText.setAttribute('id', artworks[i].id);
-            infoText.setAttribute('position', artworks[i].titlex + ' ' + artworks[i].likey + ' ' + artworks[i].titlez)
-            infoText.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + '0')
-            infoText.setAttribute('scale', artworks[i].titles1 + ' ' + artworks[i].titles2 + ' ' + artworks[i].titles3)
-            infoText.setAttribute('material', 'color: black;')
-            infoText.setAttribute('artwork', 'id:' + artworks[i].id + '; likes:' + artworks[i].likes)
-            infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value: Likes: ' + artworks[i].likes)
-            sceneEl.appendChild(infoText);
-            AFRAME.registerComponent('artwork', {
-                schema: {
-                    id: { default: 'default' },
-                    likes: { type: 'int', default: 'default' }
-                },
-                init: function() {
-                    var data = this.data;
-                    var el = this.el;
-                    let newLikes = data.likes + 1;
-                    el.addEventListener('click', function() {
-                        console.log(data.id);
-                        el.setAttribute('artwork', 'id:' + data.id + '; likes:' + newLikes)
-                        fb.like(data.id, data.likes)
-                    });
-                }
-            });
+            // var infoText = document.createElement('a-text');
+            // infoText.setAttribute('id', artworks[i].id);
+            // infoText.setAttribute('position', artworks[i].titlex + ' ' + artworks[i].likey + ' ' + artworks[i].titlez)
+            // infoText.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + '0')
+            // infoText.setAttribute('scale', artworks[i].titles1 + ' ' + artworks[i].titles2 + ' ' + artworks[i].titles3)
+            // infoText.setAttribute('material', 'color: black;')
+            // infoText.setAttribute('artwork', 'id:' + artworks[i].id + '; arraypos:' + artworks[i].location - 1)
+            // infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value: Likes: ' + artworks[i].likes)
+            // sceneEl.appendChild(infoText);
+            // AFRAME.registerComponent('artwork', {
+            //     schema: {
+            //         id: { default: 'default' },
+            //         arraypos: { type: 'int', default: 'default' }
+            //     },
+            //     init: function() {
+            //         var data = this.data
+            //         var arrayloc = data.arraypos;
+            //         console.log(data.id)
+            //         var el = this.el;
+            //         el.addEventListener('click', function() {
+            //             let k = data.arraypos
+            //             let newlikeval = artworks[k].likes + 1
+            //             console.log(data.id);
+            //             // el.setAttribute('artwork', 'id:' + data.id + '; likes:' + newLikes)
+            //             console.log(newlikeval)
+            //             fb.like(data.id, newlikeval)
+            //         });
+            //     }
+            // });
             // // Author
             // var infoText_author = document.createElement('a-text');
             // infoText_author.setAttribute('id', artworks[i].id);

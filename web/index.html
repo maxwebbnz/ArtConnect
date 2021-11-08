@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
     <!-- p5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
     <!-- underscore.js :D -->
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js
 "></script>
@@ -40,7 +41,7 @@
 </head>
 
 <body>
-    <a-scene>
+    <a-scene inspector-plugin-recast>
         <!-- Assests -->
         <a-assets>
             <img id="sky" src="https://st4.depositphotos.com/1000633/21871/i/600/depositphotos_218714768-stock-photo-blue-sky-panorama-clouds-summer.jpg"></img>
@@ -63,10 +64,11 @@
         <a-entity id="scene1">
             <a-entity id="room">
                 <a-plane src="#floorTiles" material="" geometry="" rotation="-90 0 0" scale="10 10 1" id="floor"></a-plane>
-                <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 90 0" scale="10 10 1" id="leftwall" position="-5.063 0.735 0"></a-plane>
-                <a-plane src="#walls" wallbounds material="" src="#walls" geometry="" rotation="" scale="10.600 10.28 1" id="centerwall" position="0 0.73469 -5.33347"></a-plane>
-                <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 0.754 -0.59173"></a-plane>
-                <a-plane src="#walls" wallbounds material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 0.754 -0.59173"></a-plane>
+                <a-plane src="#walls" wallbounds="" material="" geometry="" rotation="0 90 0" scale="10 10 1" id="leftwall" position="-5.063 100 0" animation="property: position; to: -5.063 0.82499 0; dur: 2000; easing: linear; loop: false"></a-plane>
+                <a-plane src="#walls" wallbounds="" material="" geometry="" rotation="" scale="10.6 10.28 1" id="centerwall" position="0 100 -5.11143" animation="property: position; to: 0 0.73469 -5.11143; dur: 3000; easing: linear; loop: false">
+
+                </a-plane>
+                <a-plane src="#walls" wallbounds="" material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 1000 -0.59173" animation="property: position; to: 4.99656 0.7052 -0.59173; dur: 2000; easing: linear; loop: false"></a-plane>
             </a-entity>
             <a-entity id="paintings">
                 <!-- <a-plane material="" geometry="" scale="1.67 0.45 1"></a-plane> -->
