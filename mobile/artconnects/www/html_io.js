@@ -239,6 +239,7 @@ let ui = {
             document.getElementById('login').style = 'display: none';
             document.getElementById('logincontent').style = 'display: none';
             document.getElementById('photo').style = 'display: none';
+            document.getElementById('herebymistake').style = 'display: none';
             document.getElementById('register').style = 'display: block';
         } else if (_page == 'draw') {
             ptro.show();
