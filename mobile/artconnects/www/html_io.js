@@ -57,7 +57,7 @@ let html = {
             // USEREMAIL.innerHTML = _info1.email
             // USERPRORFILEPIC.src = _info1.profileURL
             // generate posts automatically
-        const POSTDOMELEMENT = document.getElementById("card-container");
+        const POSTDOMELEMENT = document.getElementById("gallery");
         POSTDOMELEMENT.innerHTML = '';
         document.getElementById('bumper').style = 'display: none;'
         AUTHCONTENT.style = 'display: block;'
@@ -110,44 +110,26 @@ let html = {
                 let createPostCard = (_title, _name, _imgurl, _likes, _id) => {
 
                     let card = document.createElement('div');
-                    card.className = 'card';
+                    card.className = _id;
 
                     let cardBody = document.createElement('div');
-                    cardBody.className = 'card-body';
-
-                    let title = document.createElement('h5');
-                    title.innerText = "Title: " + _title;
-                    title.className = 'card-title';
-                    title.style = 'margin-top: 1%;'
-
-                    let divide = document.createElement("HR");
-
-                    let name = document.createElement('div');
-                    name.innerText = "Created by: " + _name;
-                    name.className = 'card-text';
-
+                    cardBody.className = 'gallery-item';
+                    cardBody.tabIndex = 0
 
                     let image = document.createElement('div');
                     let imageContent = document.createElement('img')
                     imageContent.src = _imgurl;
-                    imageContent.className = 'card-img-top';
+                    imageContent.className = 'gallery-image';
                     image.appendChild(imageContent)
-                        // let loader = document.createElement('div')
-                        // loader.className = 'spinner-border text-primary'
-                        // loader.role = 'status'
-                        // image.appendChild(loader)
 
-                    // if (!imageContent.complete || imageContent.naturalWidth !== 0) {
-                    //     console.log('hello')
-                    //     image.removeChild(loader)
-                    // }
-
-
-                    let likes = document.createElement('i')
-                    likes.className = 'bi bi-star'
-
-                    let likesAmmount = document.createElement('span')
-                    likesAmmount.innerText = " - " + _likes + ' likes'
+                    let name = document.createElement('div');
+                    name.className = 'gallery-item-info';
+                    let list = document.createElement('ul')
+                    let listItem = document.createElement('li')
+                    listItem.className = "gallery-item-likes"
+                    listItem.innerHTML = "Title: " + _title
+                    name.appendChild(list)
+                    list.appendChild(listItem)
 
 
                     let editButton = document.createElement('button')
@@ -213,12 +195,9 @@ let html = {
 
 
                     cardBody.appendChild(image);
-                    cardBody.appendChild(title);
+                    // cardBody.appendChild(title);
                     cardBody.appendChild(name);
-                    cardBody.appendChild(likes)
-                    cardBody.appendChild(likesAmmount)
-                        // cardBody.appendChild(cardLikes)
-                    cardBody.appendChild(divide);
+                    // cardBody.appendChild(cardLikes)
                     cardBody.appendChild(editButton);
                     cardBody.appendChild(deleteButton);
 
@@ -229,11 +208,11 @@ let html = {
 
                 let initListOfTasks = () => {
                     if (cardContainer) {
-                        document.getElementById('card-container').replaceWith(cardContainer);
+                        document.getElementById('gallery').replaceWith(cardContainer);
                         return;
                     }
 
-                    cardContainer = document.getElementById('card-container');
+                    cardContainer = document.getElementById('gallery');
                     posts.forEach((posts) => {
                         console.log('ran init')
                         createPostCard(posts);
@@ -258,6 +237,8 @@ let ui = {
             document.getElementById('artworkauthor').value = client.name
         } else if (_page == 'register') {
             document.getElementById('login').style = 'display: none';
+            document.getElementById('logincontent').style = 'display: none';
+            document.getElementById('photo').style = 'display: none';
             document.getElementById('register').style = 'display: block';
         } else if (_page == 'draw') {
             ptro.show();

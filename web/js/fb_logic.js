@@ -6,11 +6,11 @@
 //* Base Variable Definitions
 let artWorks = [];
 let id = 'id'
-
-/*
- * Copyright (c) 2021 Max Webb
- * All rights reserved.
- */
+    // header("Access-Control-Allow-Origin: *");
+    /*
+     * Copyright (c) 2021 Max Webb
+     * All rights reserved.
+     */
 
 let fb = {}
 

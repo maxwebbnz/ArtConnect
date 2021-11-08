@@ -12,7 +12,7 @@ let fb_uploadHandler = {
         // html variables
         let artName = document.getElementById('artworkname').value
         let artAuthor = document.getElementById('artworkauthor').value
-        let artFile = document.querySelector("#photo").files[0];
+        let artFile = document.querySelector("#artworkfile").files[0];
 
         // file url
         let artFileURL;

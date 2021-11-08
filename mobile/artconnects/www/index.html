@@ -7,14 +7,14 @@
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
-<script type="text/javascript" src="cordova.js"></script>
-<script src="cordova.js"></script>
+<!-- <script type="text/javascript" src="cordova.js"></script>
+<script src="cordova.js"></script> -->
 <!-- <script src="https://unpkg.com/cordova@2.5.0/cordova.js"></script> -->
 <!-- Draw -->
 <!-- <script src="painterro-1.2.66.min.js"></script> -->
-<script src="download.js"></script>
+<!-- <script src="download.js"></script> -->
 
-<script src="index.js"></script>
+<!-- <script src="index.js"></script> -->
 <!--   Ui -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.7/dist/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
@@ -25,7 +25,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 <script src="html_io.js"></script>
 
 <title>ArtConnect</title>
@@ -42,12 +41,12 @@
 </script>
 </head>
 <header>
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-light ">
         <div class="container-fluid">
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active" href="#">ArtConnect <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" id="authContent" style="display: none" onclick="ui.show('form')">Upload ArtWork</a>
-                <a class="nav-item nav-link" id="authContent" style="display: block" onclick="ui.show('draw')">Draw ArtWork</a>
+                <!-- <a class="nav-item nav-link" id="authContent" style="display: block" onclick="ui.show('draw')">Draw ArtWork</a> -->
             </div>
             <div id="userIcon" class="d-flex">
                 <!-- <img id="userAvatar" style="margin-right: 10px; display: none;" class="rounded-circle" width="20px" height="20px"></img> -->
@@ -58,61 +57,111 @@
 </header>
 
 <body>
-    <div class="d-flex justify-content-center">
-        <div id="login">
-            <img src="img/web_hi_res_512.png" alt="ArtConnect" width="100" style="border-radius: 20px; padding-bottom: 10px;">
-            <h2>Welcome to ArtConnect</h2>
-            <center>
-                <hr style="width: 80%;">
-            </center>
-            <!-- <h4>Please login below</h4> -->
-            <button type="button" class="btn btn-primary" onclick="auth.login()"><i class="bi bi-google"></i> Login with Google </button>
+    <div class="container " id="logincontent">
+        <div class="row">
+            <div class="col">
+                <div id="login">
+                    <img src="img/web_hi_res_512.png" alt="ArtConnect" width="100" style="border-radius: 20px; padding-bottom: 10px;">
+                    <h2>Welcome to ArtConnect</h2>
+                    <center>
+                        <hr style="width: 80%;">
+                    </center>
+                    <!-- <h4>Please login below</h4> -->
+                    <button type="button" class="btn btn-primary" onclick="auth.login()"><i class="bi bi-google"></i> Login with Google </button>
+                </div>
+            </div>
+            <div class="col">
+                <div id="photo">
+                    <h1 style="border-radius: 20px; padding-bottom: 10px;"><i class="bi bi-plus-circle"></h1></i>
+                        <h2>New here? <b>Kia ora!</b></h2>
+                        <h3>Register Below</h3>
+                        <center>
+                            <hr style="width: 80%;">
+                        </center>
+                        <button type="button" class="btn btn-success" onclick="auth.login()"><i class="bi bi-google"></i> Register with Google </button>
+
+                </div>
+            </div>
         </div>
     </div>
     <div id="welcomePage">
-        <h2>Welcome, <span id="clientNAME"></span></h2>
-        <hr>
-        <h4>Your shared artwork</h4>
-        <div id="card-container"></div>
-        <div id="bumper">
-            <div class="h2">You have no posts, go create one!</div>
-            <hr>
-            <button type="button" class="btn btn-primary" onclick="ui.show('form')">Create a post</button>
+        <div class="container">
+            <div id="boxer">
+                <h2>Welcome, <span id="clientNAME"></span></h2>
+                <!-- <hr> -->
+                <h4>Your shared artwork</h4>
+            </div>
+            <div class="containers">
+                <div id="gallery" class="gallery">
+                    <div class="gallery-item" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
+                        <div class="gallery-item-info">
+                            <ul>
+                                <li class="gallery-item-likes">Name: This is my future!</li>
+                                <!-- <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" class="gallery-image" alt="">
+                        <div class="gallery-item-type">
+                            <span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
+                        </div>
+                        <div class="gallery-item-info">
+                            <ul>
+                                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 30</li>
+                                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bumper">
+                <div class="h2">You have no posts, go create one!</div>
+                <button type="button" class="btn btn-primary" onclick="ui.show('form')">Create a post</button>
+            </div>
         </div>
     </div>
     <div id="uploadArtWork">
-        <h3>Upload Artwork</h3>
-        <form>
-            <div class="mb-3">
-                <label for="artworkname" class="form-label">Artwork Name</label>
-                <input class="form-control" id="artworkname">
-            </div>
-            <div class="mb-3">
-                <label for="artworkauthor" class="form-label">Artwork Authour</label>
-                <input class="form-control" id="artworkauthor">
-            </div>
-            <div class="mb-3">
-                <label for="artworktags" class="form-label">Artwork Tags</label>
-                <input class="form-control" id="artworktags">
-            </div>
-            <input class="form-control" type="file" id="photo">
-            <!-- removed -- doesn't need to be here :D -->
-            <!-- <button style="margin-top: 20px" type='button' id="btn" class="btn btn-primary">Take Photo</button>
-            <button id="captureImage">SHOT</button> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xl">
+                    <div id="boxerforupload">
+                        <h3>Upload Artwork</h3>
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="artworkname" class="form-label">Artwork Name</label>
+                            <input class="form-control" id="artworkname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="artworkauthor" class="form-label">Artwork Authour</label>
+                            <input class="form-control" id="artworkauthor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="artworktags" class="form-label">Artwork Tags</label>
+                            <input class="form-control" id="artworktags">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Your artwork</label>
+                            <input class="form-control" type="file" id="artworkfile">
 
-            <div style="margin-top: 20px" class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="permisson">
-                <label class="form-check-label" for="permisson">I give permisson to ArtConnect to host this photo</label>
+                        </div>
+                        <div style="margin-top: 20px" class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="permisson">
+                            <label class="form-check-label" for="permisson">I give permisson to ArtConnect to host this photo</label>
+                        </div>
+                        <button class="btn btn-primary" type='button' onclick='fb_uploadHandler.upload()'>Submit</button>
+                    </form>
+                </div>
+                <div class="col" id="privacynfo">
+                    <h1>We respect privacy.</h1>
+                    <h4>When you upload to us, you are allowing us to host your artwork on Google's cloud servers, and display it on our gallery</h4>
+                </div>
             </div>
-            <button class="btn btn-primary" type='button' onclick='fb_uploadHandler.upload()'>Submit</button>
-        </form>
+        </div>
     </div>
-    <div id="register">
-        <h4>Please register below</h4>
-        <input type="name" id="clientname" placeholder='Your Name'><br>
-        <input type="email" id="clientemail" placeholder='Your Email'><br>
-        <input type="password" id="clientpassword" placeholder='Your Password'><br>
-        <button type="button" class="btn btn-primary" onclick="auth.registerWithEmail()">Register</button>
+
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
@@ -128,7 +177,11 @@
     
     header {
         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-        margin-top: 3%;
+        /* margin-top: 3%; */
+        background-image: url(https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1200&fit=crop&crop=faces);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: cover;
     }
     
     body {
@@ -139,18 +192,44 @@
         background-size: cover;
     }
     
-    #login {
-        /* display: block; */
+    #logincontent {
+        margin-top: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        /* vertical-align: middle; */
+    }
+    
+    #photo {
+        /* display: none; */
         text-align: center;
-        margin-top: 60%;
-        display: inline-block;
-        vertical-align: middle;
+        /* margin-top: 10%; */
+        /* display: inline-block; */
+        /* margin-right: 20%; */
+        /* vertical-align: middle; */
         color: white;
         background-color: grey;
         height: 280px;
         padding-top: 25px;
         border-radius: 20px;
-        width: 90%;
+        /* width: 30%; */
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+    }
+    
+    #login {
+        /* display: none; */
+        text-align: center;
+        /* margin-top: 10%; */
+        /* display: inline-block; */
+        /* margin-right: 20%; */
+        /* vertical-align: middle; */
+        color: white;
+        background-color: grey;
+        height: 280px;
+        padding-top: 25px;
+        border-radius: 20px;
+        /* width: 30%; */
         background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
@@ -165,19 +244,56 @@
     
     #welcomePage {
         display: none;
-        margin-top: 20%;
+        margin-top: 2px;
         padding-left: 3%;
+        max-width: 93.5rem;
     }
     
+    #boxer {
+        color: black;
+        /* width: 4%; */
+        /* background-color: grey; */
+        background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+        height: 100px;
+        padding-top: 5px;
+        padding-left: 1%;
+        margin-bottom: 5px;
+        margin-left: 1%;
+        width: 71.2%;
+        border-radius: 5px;
+    }
+    
+    #boxerforupload {
+        color: black;
+        width: 10%;
+        /* background-color: grey; */
+        background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+        height: 50px;
+        padding-top: 5px;
+        padding-left: 9px;
+        margin-bottom: 5px;
+        margin-left: 0;
+        width: 74%;
+        border-radius: 5px;
+    }
+
     .usersSharedArtWork {
         margin-top: 5%;
     }
     
+    #privacynfo {
+        margin-left: 20%;
+        text-align: center;
+        background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+        border-radius: 5px;
+        padding-top: 10%;
+    }
+
     #uploadArtWork {
         display: none;
-        margin-top: 20%;
+        /* margin-top: 3%; */
         padding-left: 3%;
-        width: 90%;
+        /* width: 45%; */
     }
     /* .card-body img {
         width: 20%;
@@ -211,39 +327,82 @@
             background-position: 0% 50%;
         }
     }
-</style>
+    /* Gallery Section */
 
-<script>
-    function onLoad() {
-        document.addEventListener("deviceready", onDeviceReady, false);
-
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -1rem -1rem;
+        padding-bottom: 3rem;
     }
 
-    // ptro.show();
-    document.onpaste = (event) => {
-        const {
-            items
-        } = event.clipboardData || event.originalEvent.clipboardData;
-        Array.from(items).forEach((item) => {
-            if (item.kind === 'file') {
-                if (!window.painterroOpenedInstance) {
-                    // if painterro already opened - it will handle onpaste
-                    const blob = item.getAsFile();
-                    const reader = new FileReader();
-                    reader.onload = (readerEvent) => {
-                        window.painterroOpenedInstance = Painterro({
-                            onHide: () => {
-                                window.painterroOpenedInstance = undefined;
-                            },
-                            saveHandler: (image, done) => {
-                                console.log('Save it here', image.asDataURL()); // you could provide your save handler
-                                done(true);
-                            },
-                        }).show(readerEvent.target.result, item.type);
-                    };
-                    reader.readAsDataURL(blob);
-                }
-            }
-        });
-    };
+    .gallery-item {
+        position: relative;
+        /* flex: 1 0 22rem; */
+        margin: 1rem;
+        margin-left: 0;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .gallery-item:hover .gallery-item-info,
+    .gallery-item:focus .gallery-item-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        border-radius: 20px;
+        height: 90%;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-item-info {
+        display: none;
+    }
+
+    .gallery-item-info li {
+        display: inline-block;
+        font-size: 1.7rem;
+        font-weight: 600;
+    }
+
+    .gallery-item-likes {
+        margin-right: 2.2rem;
+    }
+
+    .gallery-item-type {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2.5rem;
+        text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+    }
+
+    .fa-clone,
+    .fa-comment {
+        transform: rotateY(180deg);
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .gallery-image {
+        height: 500;
+        width: 500;
+        border-radius: 10px;
+    }
+
+    .containers {
+        max-width: 93.5rem;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+</style>
+
+
 </script>

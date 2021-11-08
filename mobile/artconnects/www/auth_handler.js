@@ -71,6 +71,8 @@ let auth = {
                 let uid = client.uid
                 html.update(client);
                 ui.hide('login')
+                document.getElementById('photo').style = 'display: none';
+
                 ui.show('welcomePage')
                 alert.authSuccess()
             }
