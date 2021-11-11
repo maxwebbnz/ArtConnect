@@ -489,27 +489,26 @@ let artWork = {
             console.log(artworks[i])
             planeId.setAttribute('class', 'generatedartwork');
             // let pos = randomXPos + ' 1.47 -4.4265'
-            planeId.setAttribute('scale', '1.63 1.94 0.00001')
-            planeId.setAttribute('position', artworks[i].x + ' ' + artworks[i].y + ' ' + artworks[i].z)
-            planeId.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + artworks[i].r3)
+            planeId.setAttribute('scale', '1.63 1.94 0.00001');
+            planeId.setAttribute('position', artworks[i].x + ' ' + artworks[i].y + ' ' + artworks[i].z);
+            planeId.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + artworks[i].r3);
+            // planeId.setAttribute();
+            $(planeId).attr('arwt', 'id:' + artworks[i].id + '; arraypos:' + artworks[i].location - 1 + "; name: 'Max Webb'")
             sceneEl.appendChild(planeId);
+
+
             // // Info plane
             // var infoPlane = document.createElement('a-plane')
             // infoPlane.setAttribute('id', artworks[i].id);
             // infoPlane.setAttribute('class', 'generatedartwork');
-            // infoPlane.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + artworks[i].r3)
+            // infoPlane.setAttribute('rotation' , artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + artworks[i].r3)
             // infoPlane.setAttribute('position', artworks[i].x + ' ' + '2.249' + ' ' + artworks[i].z)
             // infoPlane.setAttribute('scale', "1.63 1.94 0.00001")
-            // sceneEl.appendChild(infoPlane);
+            // sceneEl.appendChild(infoPlane);q
             // Title
             var infoText = document.createElement('a-text');
             infoText.setAttribute('id', artworks[i].id);
-            infoText.setAttribute('position', artworks[i].titlex + ' ' + artworks[i].titley + ' ' + artworks[i].titlez)
-            infoText.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + '0')
-            infoText.setAttribute('scale', artworks[i].titles1 + ' ' + artworks[i].titles2 + ' ' + artworks[i].titles3)
-            infoText.setAttribute('material', 'color: black;')
-            infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value:' + artworks[i].title + ' by ' + artworks[i].author)
-            sceneEl.appendChild(infoText);
+            // infoText.setAttribute('position',   artworks[i].titlex + ' ' + artworks[i].titley + ' ' + artworks[i].titlez) infoText.setAttribute('rotation', artworks[i].r1 + ' ' + artworks[i].r2 + ' ' + '0') infoText.setAttribute('scale', artworks[i].titles1 + ' ' + artworks[i].titles2 + ' ' + artworks[i].titles3) infoText.setAttribute('material', 'color: black;') infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value:' + artworks[i].title + ' by ' + artworks[i].author) sceneEl.appendChild(infoText);
             // var infoText = document.createElement('a-text');
             // infoText.setAttribute('id', artworks[i].id);
             // infoText.setAttribute('position', artworks[i].titlex + ' ' + artworks[i].likey + ' ' + artworks[i].titlez)
@@ -519,26 +518,7 @@ let artWork = {
             // infoText.setAttribute('artwork', 'id:' + artworks[i].id + '; arraypos:' + artworks[i].location - 1)
             // infoText.setAttribute('text', 'anchor:  align;  align: center; width:  5;  value: Likes: ' + artworks[i].likes)
             // sceneEl.appendChild(infoText);
-            // AFRAME.registerComponent('artwork', {
-            //     schema: {
-            //         id: { default: 'default' },
-            //         arraypos: { type: 'int', default: 'default' }
-            //     },
-            //     init: function() {
-            //         var data = this.data
-            //         var arrayloc = data.arraypos;
-            //         console.log(data.id)
-            //         var el = this.el;
-            //         el.addEventListener('click', function() {
-            //             let k = data.arraypos
-            //             let newlikeval = artworks[k].likes + 1
-            //             console.log(data.id);
-            //             // el.setAttribute('artwork', 'id:' + data.id + '; likes:' + newLikes)
-            //             console.log(newlikeval)
-            //             fb.like(data.id, newlikeval)
-            //         });
-            //     }
-            // });
+
             // // Author
             // var infoText_author = document.createElement('a-text');
             // infoText_author.setAttribute('id', artworks[i].id);
@@ -575,7 +555,7 @@ function randomNoRepeats(array) {
 //         console.log(this);
 //     });
 // });
-/* 
+/*
 1
 <a-plane material="" geometry="" scale="1.63 1.94 0.00001" position="-3.47685 1.42463 -5.24289"></a-plane>
 2
@@ -601,3 +581,30 @@ function randomNoRepeats(array) {
 12
 <a-plane material="" geometry="" scale="1.63 1.94 0.00001" position="-4.69199 1.42463 -3.67985" rotation="180 -90 0"></a-plane>
 */
+// let data;
+AFRAME.registerComponent('arwt', {
+    schema: {
+        id: { default: 'n/a' },
+        arraypos: { default: 'n/a' },
+        name: { default: 'n/a' }
+    },
+    init: function() {
+        let data = this.data;
+        var el = this.el; // <a-box>
+        var defaultColor = el.getAttribute('material').color;
+
+        el.addEventListener('mouseenter', function() {
+            console.log(data.id)
+        });
+
+        el.addEventListener('mouseleave', function() {
+            el.setAttribute('color', defaultColor);
+            console.log("left")
+
+        });
+    }
+});
+
+function displayInfo(_d) {
+    console.log(_d.id)
+}

@@ -4,7 +4,10 @@
  */
 
 let amountOfArt = 0;
-
+$(document).ready(function() {
+    console.log("Gears are ticking!");
+    $('#logincontent').fadeIn(1500);
+});
 var loginMixin = Swal.mixin({
     toast: true,
     icon: 'success',
@@ -47,6 +50,8 @@ const nameReg = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)
 
 let html = {
     update: function(_info1, _info2) {
+        console.log(_info1)
+        console.log(_info1.name)
         const USERHTML = document.getElementById('clientNAME')
         const USEREMAIL = document.getElementById('clientEMAIL')
         const AUTHCONTENT = document.getElementById('authContent')
@@ -97,7 +102,8 @@ let html = {
                     //* this is more elegant!
                     childSnapshot.forEach(function(snapshot) {
                         console.log(snapshot.val().name)
-                        createPostCard(snapshot.val().title, snapshot.val().author, snapshot.val().url, snapshot.val().likes, snapshot.val().id);
+                        console.log(snapshot.val().storagename)
+                        createPostCard(snapshot.val().title, snapshot.val().author, snapshot.val().url, snapshot.val().likes, snapshot.val().id, snapshot.val().storagename);
                         amountOfArt = amountOfArt + 1;
 
                     })
@@ -107,7 +113,7 @@ let html = {
                 console.log(posts)
                 let cardContainer;
 
-                let createPostCard = (_title, _name, _imgurl, _likes, _id) => {
+                let createPostCard = (_title, _name, _imgurl, _likes, _id, _gs) => {
 
                     let card = document.createElement('div');
                     card.className = _id;
@@ -188,6 +194,16 @@ let html = {
                         firebase.database().ref('artwork/' + client.uid + '-' + _id).update({
 
                         });
+
+                        let ref = firebase.storage().ref();
+
+                        var imgGSRef = ref.child(_gs);
+
+                        imgGSRef.delete().then(() => {
+                            console.log("GS | Executed successfully")
+                        }).catch((error) => {
+                            console.log("GS | " + error)
+                        });
                         alert.success("Deleted Post!", "deletedPost")
                         html.update(client)
 
@@ -232,25 +248,31 @@ let html = {
 let ui = {
     show: function(_page) {
         if (_page == 'form') {
-            document.getElementById('welcomePage').style = 'display: none';
-            document.getElementById('uploadArtWork').style = 'display: block';
+            // document.getElementById('welcomePage').style = 'display: none';
+            $('#welcomePage').fadeOut();
+            // document.getElementById('uploadArtWork').style = 'display: block';
+            $('#uploadArtWork').fadeIn();
             document.getElementById('artworkauthor').value = client.name
         } else if (_page == 'register') {
-            document.getElementById('login').style = 'display: none';
-            document.getElementById('logincontent').style = 'display: none';
-            document.getElementById('photo').style = 'display: none';
-            document.getElementById('herebymistake').style = 'display: none';
-            document.getElementById('register').style = 'display: block';
+            // document.getElementById('login').style = 'display: none';
+            // document.getElementById('logincontent').style = 'display: none';
+            // document.getElementById('photo').style = 'display: none';
+            // document.getElementById('herebymistake').style = 'display: none';
+            // document.getElementById('register').style = 'display: block';
         } else if (_page == 'draw') {
             ptro.show();
 
         } else {
-            document.getElementById(_page).style = 'display: block;'
-                // docume
+            // document.getElementById(_page).style = 'display: block;'
+            // docume
+            $('#' + _page).fadeIn();
+
         }
     },
     hide: function(_page) {
-        document.getElementById(_page).style = 'display: none;'
+        // document.getElementById(_page).style = 'display: none;'
+        $('#' + _page).fadeOut();
+
     }
 }
 

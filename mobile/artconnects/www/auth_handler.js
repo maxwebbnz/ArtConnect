@@ -11,9 +11,12 @@ let auth = {
         alert.loading()
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
+                console.log("User is logged in already")
+
                 auth.handleSuccess(user, user.uid)
                 loggedin = true
             } else {
+                console.log("Is not logged in")
                 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                     .then(function() {
                         provider = new firebase.auth.GoogleAuthProvider();
@@ -59,11 +62,7 @@ let auth = {
                 let tokenParse = _userToken
                 client = _userInformation;
                 console.log(client)
-                let uid = client.uid
-                html.update(client);
-                ui.hide('login')
-                ui.show('welcomePage')
-                alert.authSuccess()
+                this.handleSuccess(client, tokenParse)
             } else {
                 const userData = snapshot.val();
                 console.log("fb_initUserData | User has logged in before, no need to write more data", 'info')

@@ -46,6 +46,7 @@ let fb_uploadHandler = {
                 title: artName,
                 author: artAuthor,
                 url: artFileURL,
+                storagename: name,
                 likes: 0,
                 id: newId
             });
@@ -54,6 +55,7 @@ let fb_uploadHandler = {
             firebase.database().ref('artwork/' + client.uid + '-' + newId).update({
                 title: artName,
                 author: artAuthor,
+                storagename: name,
                 url: artFileURL,
                 likes: 0,
                 id: newId
