@@ -69,7 +69,12 @@
                 <a-plane src="#walls" wallbounds="" material="" geometry="" rotation="" scale="10.6 10.28 1" id="centerwall" position="0 100 -5.11143" animation="property: position; to: 0 0.73469 -5.11143; dur: 3000; easing: linear; loop: false">
 
                 </a-plane>
+                <a-plane src="#walls" wallbounds="" material="" geometry="" rotation="0 180 0" scale="10.6 10.28 1" id="backwall" position="0 0.73469 4.32962" animation="property: position; to: 0 0.73469 -5.11143; dur: 3000; easing: linear; loop: NaN"></a-plane>
                 <a-plane src="#walls" wallbounds="" material="" geometry="" rotation="0 -90 0" scale="10 10.37 1" id="rightwall" position="4.99656 1000 -0.59173" animation="property: position; to: 4.99656 0.7052 -0.59173; dur: 2000; easing: linear; loop: false"></a-plane>
+            </a-entity>
+            <a-entity id="welcomeText" camera="" look-controls="" position="-0.09772 3.71411 -3.72171" rotation="-5.042028597151241 -0.9167324722093168 0">
+                <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" material="color: #1100ff; opacity: 0.5" scale="10.79 2.92 1"></a-entity>
+                <a-text text="letterSpacing: -0.28; value: ArtConnect; text-align:center;" position="-0.88 0.03 0"></a-text>
             </a-entity>
             <a-entity id="paintings">
                 <!-- <a-plane material="" geometry="" scale="1.67 0.45 1"></a-plane> -->
